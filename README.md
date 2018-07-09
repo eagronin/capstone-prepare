@@ -17,7 +17,9 @@ This section is organized as follows:
 **Data Preparation for Cluster Analysis**<br/>
 **Data Preparation for Graph Analytics**
 
-The analysis is described in the [next section](https://eagronin.github.io/capstone-prepare/).
+The data are described in the [previous section](https://eagronin.github.io/capstone-acquire/).
+
+The analysis is described in the [next section](https://eagronin.github.io/capstone-analyze/).
 
 ## Preliminary Data Exploration
 
@@ -25,17 +27,17 @@ As a first step, we load the file `buy-clicks.csv` described in the [previous se
 
 Below is a histogram showing how many times each item is purchased:
 
-![](https://github.com/eagronin/capstone-prepare/blob/master/the-number-of-times-each-item-is-purchased.png?raw=true)
+![](https://github.com/eagronin/capstone-acquire/blob/master/the-number-of-times-each-item-is-purchased.png?raw=true)
 
 We can see on the chart below how much money was made from each item:
 
-![](https://github.com/eagronin/capstone-prepare/blob/master/revenue-generated-by-each-item.png?raw=true)
+![](https://github.com/eagronin/capstone-acquire/blob/master/revenue-generated-by-each-item.png?raw=true)
 
 We note that the revenue was calculated as the sum of prices for each item multiplied by 2% which is the amount that Eglence, Inc. earns for each item sold.
 
 We then filter the data to plot the total amount of money spent by the top ten users (ranked by how much money they spent):
 
-![](https://github.com/eagronin/capstone-prepare/blob/master/amount-spent-by-the-top-ten-users.png?raw=true)
+![](https://github.com/eagronin/capstone-acquire/blob/master/amount-spent-by-the-top-ten-users.png?raw=true)
 
 The following table shows the user id, platform, and hit-ratio percentage for the top three buying users:
 
@@ -60,7 +62,7 @@ In this section we prepare the data for fitting a decision tree to make predicti
 
 A new categorical attribute was created to enable analysis of players as broken into 2 categories (HighRollers and PennyPinchers).  A screenshot of the attribute in KNIME follows:
 
-![](https://github.com/eagronin/capstone-prepare/blob/master/attribute-creation.png?raw=true)
+![](https://github.com/eagronin/capstone-acquire/blob/master/attribute-creation.png?raw=true)
 
 This new attribute was derived by binning avg_price into two categories: HighRollers (buyers of items that cost more than $5.00) and PennyPinchers (buyers of items that cost $5.00 or less). The attribute takes the value of 1 if avg_price is higher than $5.00 and zero otherwise.  The name of the new attribute is “highRollers”.  Of the 1411 samples in the dataset there are 575 HighRollers and 836 PennyPinchers.
 
@@ -109,10 +111,6 @@ Chattier users, initiators of longer conversations and users who belowng to chat
 
 We discussed the process of loading the chat data into Neo4j in the [previous section](https://eagronin.github.io/capstone-acquire/).  Below is a screenshot that shows a portion of the graph:
 
-![](https://github.com/eagronin/capstone-prepare/blob/master/graph-screenshot.png?raw=true)
+![](https://github.com/eagronin/capstone-acquire/blob/master/graph-screenshot.png?raw=true)
 
 Next step: [Analysis](https://eagronin.github.io/capstone-analyze/)
-
-
-
- 
