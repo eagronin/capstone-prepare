@@ -29,7 +29,7 @@ The analysis is described in the [next section](https://eagronin.github.io/capst
 
 # Preliminary Data Exploration
 
-As a first step, we load the file `buy-clicks.csv` into Splunk and output several summary ststistics and charts to understand the data.  We find that the total amount spent on buying in-app purchase items is $21,407, while the number of unique items available to be purchased is 6.  
+As a first step, we load the file `buy-clicks.csv` described in the [previous section](https://eagronin.github.io/capstone-acquire/) into Splunk and output several summary ststistics and charts to understand the data.  We find that the total amount spent on buying in-app purchase items is $21,407, while the number of unique items available to be purchased is 6.  
 
 Below is a histogram showing how many times each item is purchased:
 
@@ -50,5 +50,34 @@ Rank | User Id | Platform | Hit-Ratio (%)
 1 | 2229 | iphone | 11.6%
 2 | 12 | iphone | 13.1%
 3 | 471 | iphone | 14.5%
+
+Overall, the data contain information on 1,411 in-app purchases made by 546 users out of the total number of 2,393 users 
+
+The 2 most expensive items (out of the total of 6 items available for purchase) generated 76.8% of revenue for Eglence, Inc.
+Futher, amount spent by top 10 users is 8.96% of the total amount spent (1,919/21,407 *100), while these users represent only 0.42% of all users (10/2,393*100)
+
+Based on this preliminary data exploration, it appears that identifying likely purchasers of the most expensive items and heaviest spenders for targeted marketing can increase revenue for Eglence, Inc.
+
+## Data Preparation for Classification Analysis
+
+In-app purchases of expensive items generate more revenue for Eglence, Inc. than purchases of inexpensive items. Therefore, it is important to identify users who are more likely to purchase expensive items and target such items to these users.  We call the users who tend to pucharaseexpensive items “HighRollers” and the users who tend to purchase inexpensive items “PennyPinchers”.  Big-ticket items are those with a price of more than $5.00, and inexpensive items are those that cost $5.00 or less.  
+
+In this section we prepare the data for fitting a decision tree to make predictions which users are HighRollers and which ones are PennyPinchers based on the known attributes.  We are using `combined_data.csv` described in the [previous section](https://eagronin.github.io/capstone-acquire/) for this analysis.
+
+A new categorical attribute was created to enable analysis of players as broken into 2 categories (HighRollers and PennyPinchers).  A screenshot of the attribute in KNIME follows:
+
+**insert screenshot**
+
+This new attribute was derived by binning avg_price into two categories: HighRollers (buyers of items that cost more than $5.00) and PennyPinchers (buyers of items that cost $5.00 or less). The attribute takes the value of 1 if avg_price is higher than $5.00 and zero otherwise.  The name of the new attribute is “highRollers”.  Of the 1411 samples in the dataset there are 575 HighRollers and 836 PennyPinchers.
+
+The creation of this new categorical attribute was necessary because the goal of building the model is to predict whether the player belongs to one of the two categories (HighRollers or PennyPinchers) rather than predicting the expected purchase price (in which case a continuous feature, such as avg_price, would be used without splitting it into two categories).
+
+The following attributes were filtered from the dataset for the following reasons:
+
+Attribute | Rationale for Filtering
+--- | ---
+userId | User ID has been removed from the dataset because it is arbitrarily assigned by the game and, as such, is irrelevant for determining whether the player is a HighRoller or a PennyPincher.
+userSessionId | Session ID has been removed from the dataset because it is arbitrarily assigned by the game and, as such, is irrelevant for determining whether the player is a HighRoller or a PennyPincher.
+avg_price | Average price has been removed from the dataset because it was used for creating the target.  Keeping avg_price in the dataset would create an illusion of strong predictive power of the model due to the relationship between avg_price and the target.  Moreover, avg_price is not going to be available for prediction in the real world, because we will need to make a prediction whether the player is a HighRoller or a PennyPincher before the player made a purchase.
 
 
