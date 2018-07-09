@@ -1,5 +1,3 @@
-## The site is under construction. Please allow for a few days for the project information to be uploaded.
-
 # Data Exploration
 
 ## Overview
@@ -13,35 +11,31 @@ The analysis in this project was performed using Python, Spark, KNIME and Neo4j.
 
 This section is organized as follows:
 
-**Introduction**<br/>
-**Description of Catch The Pink Flamingo Online Game**<br/>
-**Overview of the Catch the Pink Flamingo Data Model**<br/>
-- Gameplay<br/>
-- Simulation Overview<br/>
-- General User Sessions and Team-assignments<br/>
-- Leveling Up and More on User Sessions<br/>
-
-**Data Set Overview**<br/>
-- Data on In-App Purchases, Ad Clicks and Game-Specific Information<br/>
-- Schema of the Graph Database for Chats<br/>
+**Overview**<br/>
+**Preliminary Data Exploration**<br/>
+**Data Preparation for Classification Analysis**<br/>
+**Data Preparation for Cluster Analysis**<br/>
+**Data Preparation for Graph Analytics**
 
 The analysis is described in the [next section](https://eagronin.github.io/capstone-prepare/).
 
-# Preliminary Data Exploration
+## Preliminary Data Exploration
 
 As a first step, we load the file `buy-clicks.csv` described in the [previous section](https://eagronin.github.io/capstone-acquire/) into Splunk and output several summary ststistics and charts to understand the data.  We find that the total amount spent on buying in-app purchase items is $21,407, while the number of unique items available to be purchased is 6.  
 
 Below is a histogram showing how many times each item is purchased:
 
-**insert histogram**
+![](https://github.com/eagronin/capstone-acquire/blob/master/the-number-of-times-each-item-is-purchased.png?raw=true)
 
 We can see on the chart below how much money was made from each item:
 
-**insert histogram**
+![](https://github.com/eagronin/capstone-acquire/blob/master/revenue-generated-by-each-item.png?raw=true)
 
 We note that the revenue was calculated as the sum of prices for each item multiplied by 2% which is the amount that Eglence, Inc. earns for each item sold.
 
 We then filter the data to plot the total amount of money spent by the top ten users (ranked by how much money they spent):
+
+![](https://github.com/eagronin/capstone-acquire/blob/master/amount-spent-by-the-top-ten-users.png?raw=true)
 
 The following table shows the user id, platform, and hit-ratio percentage for the top three buying users:
 
@@ -54,7 +48,7 @@ Rank | User Id | Platform | Hit-Ratio (%)
 Overall, the data contain information on 1,411 in-app purchases made by 546 users out of the total number of 2,393 users 
 
 The 2 most expensive items (out of the total of 6 items available for purchase) generated 76.8% of revenue for Eglence, Inc.
-Futher, amount spent by top 10 users is 8.96% of the total amount spent (1,919/21,407 *100), while these users represent only 0.42% of all users (10/2,393*100)
+Futher, amount spent by top 10 users is 8.96% of the total amount spent (1,919 / 21,407 * 100), while these users represent only 0.42% of all users (10 / 2, 393 * 100)
 
 Based on this preliminary data exploration, it appears that identifying likely purchasers of the most expensive items and heaviest spenders for targeted marketing can increase revenue for Eglence, Inc.
 
@@ -66,7 +60,7 @@ In this section we prepare the data for fitting a decision tree to make predicti
 
 A new categorical attribute was created to enable analysis of players as broken into 2 categories (HighRollers and PennyPinchers).  A screenshot of the attribute in KNIME follows:
 
-**insert screenshot**
+![](https://github.com/eagronin/capstone-acquire/blob/master/attribute-creation.png?raw=true)
 
 This new attribute was derived by binning avg_price into two categories: HighRollers (buyers of items that cost more than $5.00) and PennyPinchers (buyers of items that cost $5.00 or less). The attribute takes the value of 1 if avg_price is higher than $5.00 and zero otherwise.  The name of the new attribute is “highRollers”.  Of the 1411 samples in the dataset there are 575 HighRollers and 836 PennyPinchers.
 
@@ -115,7 +109,7 @@ Chattier users, initiators of longer conversations and users who belowng to chat
 
 We discussed the process of loading the chat data into Neo4j in the [previous section](https://eagronin.github.io/capstone-acquire/).  Below is a screenshot that shows a portion of the graph:
 
-**insert graph**
+![](https://github.com/eagronin/capstone-acquire/blob/master/graph-screenshot.png?raw=true)
 
 Next step: [Analysis](https://eagronin.github.io/capstone-analyze/)
 
