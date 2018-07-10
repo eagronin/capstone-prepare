@@ -17,7 +17,7 @@ The analysis is described in the [next section](https://eagronin.github.io/capst
 
 ## Preliminary Data Exploration
 
-As a first step, we load the file `buy-clicks.csv` described in the [previous section](https://eagronin.github.io/capstone-acquire/) into Splunk and output several summary ststistics and charts to understand the data.  We find that the total amount spent on buying in-app purchase items is $21,407, while the number of unique items available to be purchased is 6.  
+As a first step, we load the file `buy-clicks.csv` described in the [previous section](https://eagronin.github.io/capstone-acquire/) into Splunk and output several summary statistics and charts to understand the data.  We find that the total amount spent on buying in-app purchase items is $21,407, while the number of unique items available to be purchased is 6.  
 
 Below is a histogram showing how many times each item is purchased:
 
@@ -44,13 +44,13 @@ Rank | User Id | Platform | Hit-Ratio (%)
 Overall, the data contain information on 1,411 in-app purchases made by 546 users out of the total number of 2,393 users 
 
 The 2 most expensive items (out of the total of 6 items available for purchase) generated 76.8% of revenue for Eglence, Inc.
-Futher, amount spent by top 10 users is 8.96% of the total amount spent (1,919 / 21,407 * 100), while these users represent only 0.42% of all users (10 / 2, 393 * 100)
+Further, amount spent by top 10 users is 8.96% of the total amount spent (1,919 / 21,407 * 100), while these users represent only 0.42% of all users (10 / 2, 393 * 100)
 
 Based on this preliminary data exploration, it appears that identifying likely purchasers of the most expensive items and heaviest spenders for targeted marketing can increase revenue for Eglence, Inc.
 
 ## Data Preparation for Classification Analysis
 
-In-app purchases of expensive items generate more revenue for Eglence, Inc. than purchases of inexpensive items. Therefore, it is important to identify users who are more likely to purchase expensive items and market such items to these users.  We call the users who tend to pucharase expensive items “HighRollers” and the users who tend to purchase inexpensive items “PennyPinchers”.  Big-ticket items are those with a price of more than $5.00, and inexpensive items are those that cost $5.00 or less.  
+In-app purchases of expensive items generate more revenue for Eglence, Inc. than purchases of inexpensive items. Therefore, it is important to identify users who are more likely to purchase expensive items and market such items to these users.  We call the users who tend to purchase expensive items “HighRollers” and the users who tend to purchase inexpensive items “PennyPinchers”.  Big-ticket items are those with a price of more than $5.00, and inexpensive items are those that cost $5.00 or less.  
 
 In this section we prepare the data for fitting a decision tree in KNIME to make predictions which users are HighRollers and which ones are PennyPinchers based on the known attributes.  We are using `combined_data.csv` described in the [previous section](https://eagronin.github.io/capstone-acquire/) for this analysis.
 
@@ -82,7 +82,7 @@ We selected 3 attributes for cluster analysis that breaks out users into distinc
 Attribute | Rationale for Selection 
 :--- |:---
 teamLevel | User experience as reflected in the teamLevel attribute could be a differentiator of user behavior.  For example, the beginners might be too focused on learning the game and not pay attention to the in-app purchase items.  To the contrary, more experienced users may express more interest in buying in-app purchase items.
-accuracyRate (count_hits / count_gameclicks) | Accuracy rate reflects how well a user is playing the game.  It may depend on user experience, yet may also reflect user intrinsic qualities.  For example, users with a higher accuracy rate may be more capable individuals, have higher incomes and, as a result, may spend more money while playing the game.
+accuracyRate (count_hits / count_gameclicks) | Accuracy rate reflects how well a user is playing the game.  It may depend on user experience yet may also reflect user intrinsic qualities.  For example, users with a higher accuracy rate may be more capable individuals, have higher incomes and, as a result, may spend more money while playing the game.
 Revenue (avg_price * count_buyId when avg_price and count_buyId are not NULL, and zero otherwise) | While revenue may correlate with the other two attributes above (teamLevel and accuracyRate), it has its own differentiating characteristics.  For example, irrespective of skills and experience, users may differ in their inclination to make in-app purchases.
 
 The training data set used for this analysis is shown below (first 5 lines):
