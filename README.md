@@ -50,15 +50,15 @@ Based on this preliminary data exploration, it appears that identifying likely p
 
 ## Data Preparation for Classification Analysis
 
-In-app purchases of expensive items generate more revenue for Eglence, Inc. than purchases of inexpensive items. Therefore, it is important to identify users who are more likely to purchase expensive items and target such items to these users.  We call the users who tend to pucharase expensive items “HighRollers” and the users who tend to purchase inexpensive items “PennyPinchers”.  Big-ticket items are those with a price of more than $5.00, and inexpensive items are those that cost $5.00 or less.  
+In-app purchases of expensive items generate more revenue for Eglence, Inc. than purchases of inexpensive items. Therefore, it is important to identify users who are more likely to purchase expensive items and market such items to these users.  We call the users who tend to pucharase expensive items “HighRollers” and the users who tend to purchase inexpensive items “PennyPinchers”.  Big-ticket items are those with a price of more than $5.00, and inexpensive items are those that cost $5.00 or less.  
 
-In this section we prepare the data for fitting a decision tree to make predictions which users are HighRollers and which ones are PennyPinchers based on the known attributes.  We are using `combined_data.csv` described in the [previous section](https://eagronin.github.io/capstone-acquire/) for this analysis.
+In this section we prepare the data for fitting a decision tree in KNIME to make predictions which users are HighRollers and which ones are PennyPinchers based on the known attributes.  We are using `combined_data.csv` described in the [previous section](https://eagronin.github.io/capstone-acquire/) for this analysis.
 
 A new categorical attribute was created to enable analysis of players as broken into 2 categories (HighRollers and PennyPinchers).  A screenshot of the attribute in KNIME follows:
 
 ![](https://github.com/eagronin/capstone-prepare/blob/master/attribute-creation.png?raw=true)
 
-This new attribute was derived by binning avg_price into two categories: HighRollers (buyers of items that cost more than $5.00) and PennyPinchers (buyers of items that cost $5.00 or less). The attribute takes the value of 1 if avg_price is higher than $5.00 and zero otherwise.  The name of the new attribute is “highRollers”.  Of the 1411 samples in the dataset there are 575 HighRollers and 836 PennyPinchers.
+This new attribute was derived by binning avg_price into two categories: HighRollers (buyers of items that cost more than $5.00) and PennyPinchers (buyers of items that cost $5.00 or less). The attribute takes the value of 1 if avg_price is higher than $5.00 and zero otherwise.  The name of the new attribute is “highRollers”.  Of the 1,411 samples in the dataset there are 575 HighRollers and 836 PennyPinchers.
 
 The creation of this new categorical attribute was necessary because the goal of building the model is to predict whether the player belongs to one of the two categories (HighRollers or PennyPinchers) rather than predicting the expected purchase price (in which case a continuous feature, such as avg_price, would be used without splitting it into two categories).
 
@@ -75,13 +75,13 @@ The data was partitioned into train and test datasets.  The train data set was u
 When partitioning the data using sampling, it is important to set the random seed in order to be able to reproduce the results.  If the random seed is not set, then any random sampling performed while fitting the model will result in variation in the results each time the model is fitted (to the same training data), which will make the results not replicable.  
 
 ## Data Preparation for Cluster Analysis
-Groups of users with different attributes (for example, experienced vs. inexperienced players) are likely to have differences in their tendency to make in-app purchases.  Therefore, revenue and profitability can be increased by choosing different strategies for targetingand setting fees for hosting in-app purchase items shown to users from different groups.
+Groups of users with different attributes (for example, experienced vs. inexperienced players) are likely to have differences in their tendency to make in-app purchases.  Therefore, revenue and profitability can be increased by choosing different strategies for targeted marketing and setting fees for hosting in-app purchase items shown to users from different groups.
 
 We selected 3 attributes for cluster analysis that breaks out users into distinct groups:
 
 Attribute | Rationale for Selection 
 :--- |:---
-teamLevel | User experience as reflected in the teamLevel attribute could be a differentiator of user behavior.  For example, the beginners might be too focused on learning the game and not pay attention to the in-app purchase items.  To the contrary, more experienced users may express more interest to the in-app purchases.
+teamLevel | User experience as reflected in the teamLevel attribute could be a differentiator of user behavior.  For example, the beginners might be too focused on learning the game and not pay attention to the in-app purchase items.  To the contrary, more experienced users may express more interest in buying in-app purchase items.
 accuracyRate (count_hits / count_gameclicks) | Accuracy rate reflects how well a user is playing the game.  It may depend on user experience, yet may also reflect user intrinsic qualities.  For example, users with a higher accuracy rate may be more capable individuals, have higher incomes and, as a result, may spend more money while playing the game.
 Revenue (avg_price * count_buyId when avg_price and count_buyId are not NULL, and zero otherwise) | While revenue may correlate with the other two attributes above (teamLevel and accuracyRate), it has its own differentiating characteristics.  For example, irrespective of skills and experience, users may differ in their inclination to make in-app purchases.
 
@@ -101,7 +101,7 @@ Row(features=DenseVector([-0.19, 1.15, 0.03])),
 Dimensions of the training data set (rows x columns) : 3688 x 3
 
 ## Data Preparation for Graph Analytics
-Chattier users, initiators of longer conversations and users who belowng to chattier teams and active user groups are likely to be more valuable, because of their potential to spread information to wider audiences.  As a result, Eglence, Inc. can increase its revenue by choosing the right marketing strategy to target such users, for example, showing the more expensive items to such users.  Even if these users are not going to buy these items, they may influence others in their networks to buy such items. 
+Chattier users, initiators of longer conversations and users who belong to chattier teams and active user groups are likely to be more valuable, because of their potential to spread information to wider audiences.  As a result, Eglence, Inc. can increase its revenue by choosing the right marketing strategy to target such users, for example, showing the more expensive items to such users.  Even if these users are not going to buy these items, they may influence others in their networks to buy such items. 
 
 We discussed the process of loading the chat data into Neo4j in the [previous section](https://eagronin.github.io/capstone-acquire/).  Below is a screenshot that shows a portion of the graph:
 
