@@ -7,7 +7,7 @@ The data for the project consists of 9 files with data on in-app purchases, ad c
 
 The project entails classification analysis by fitting a decision tree and cluster analysis using k-means.  It also uses graph analytics to identify the chattiest users / teams, longest conversations and active user groups. 
 
-The analysis in this project was performed using Python, Spark, KNIME and Neo4j.
+The analysis in this project was performed using Spark, Python, Splunk, KNIME and Neo4j.
 
 We will first discuss preliminary exploration of the data, then prepare the data for classification analysis, cluster analysis and graph analytics.
 
