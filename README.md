@@ -9,7 +9,7 @@ The project entails classification analysis by fitting a decision tree and clust
 
 The analysis in this project was performed using Python, Spark, KNIME and Neo4j.
 
-We will first discuss preliminary exploration of the data, then we will prepare the data for classification analysis, cluster analysis and graph analytics.
+We will first discuss preliminary exploration of the data, then prepare the data for classification analysis, cluster analysis and graph analytics.
 
 The data are described in the [previous section](https://eagronin.github.io/capstone-acquire/).
 
